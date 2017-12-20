@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Field from './Field';
+import Field from './components/Field';
 
 class App extends Component {
     state = {
