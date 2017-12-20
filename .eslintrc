@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": ["prettier", "prettier/react"],
+  "plugins": ["react", "import", "prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "experimentalObjectRestSpread": true,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}
