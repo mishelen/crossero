@@ -124,6 +124,22 @@ button:hover,
     margin-left: 1em;
 }
 
+.expander {
+    display: none;
+}
+
+@media all and (max-width: 640px) {
+    .custom-game-form__submit {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .expander {
+        width: 100%;
+        display: block;
+    }
+}
+
 .custom-game-form__submit[type='reset']:hover {
     border-color: #7d3749;
     background-color: #d87c87;

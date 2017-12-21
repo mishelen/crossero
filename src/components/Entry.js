@@ -71,7 +71,7 @@ class Entry extends PureComponent {
                     </div>
                 ) : (
                     <form className="custom-game-form" onSubmit={this.onSubmit} onReset={this.onReset}>
-                        <label htmlFor="dimension_input">Размер поля, n×n</label>
+                        <label htmlFor="dimension_input">Размер поля, n×n</label>&nbsp;
                         <input
                             className="custom-game-form__input"
                             id="dimension_input"
@@ -80,7 +80,8 @@ class Entry extends PureComponent {
                             type="number"
                             onChange={this.onChange}
                         />
-                        <label htmlFor="winLength_input">Длина победной линии</label>
+                        <div className="expander" />
+                        <label htmlFor="winLength_input">Длина победной линии</label>&nbsp;
                         <input
                             id="winLength_input"
                             className="custom-game-form__input"
