@@ -1,10 +1,38 @@
 import React, { Component } from 'react';
 import Field from './components/Field';
+import Entry from './components/Entry';
 
 class App extends Component {
     state = {
-        field: [['x', null, 'o'], ['o', null, 'o'], [null, 'o', null]],
-        round: 0
+        dimension: 3,
+        winLength: 3,
+        field: [],
+        round: 0,
+        gameStarted: false
+    };
+
+    initializeField = settings => {
+        this.setState(
+            prevState => {
+                const { dimension, winLength } = settings || prevState;
+                return {
+                    field: Array.from({ length: dimension }, () => Array.from({ length: dimension }, () => null)),
+                    ...(settings
+                        ? {
+                              dimension,
+                              winLength
+                          }
+                        : {})
+                };
+            },
+            () => {
+                this.setState({ gameStarted: true });
+            }
+        );
+    };
+
+    startGame = data => {
+        this.initializeField(data);
     };
 
     drawSign = (Y, X) => () => {
@@ -21,13 +49,10 @@ class App extends Component {
     };
 
     render() {
-        const { field } = this.state;
+        const { field, gameStarted } = this.state;
+        const { drawSign, startGame } = this;
 
-        return (
-            <div>
-                <Field field={field} drawSign={this.drawSign} />
-            </div>
-        );
+        return <div>{gameStarted ? <Field field={field} drawSign={drawSign} /> : <Entry startGame={startGame} />}</div>;
     }
 }
 
