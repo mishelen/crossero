@@ -1,20 +1,34 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 class Final extends PureComponent {
     static propTypes = {
         standoff: PropTypes.bool.isRequired,
-        win: PropTypes.string.isRequired
+        win: PropTypes.string.isRequired,
+        gotoMainScreen: PropTypes.func.isRequired,
+        replay: PropTypes.func.isRequired
     };
 
     render() {
-        const { standoff, win } = this.props;
+        const { standoff, win, gotoMainScreen, replay } = this.props;
 
         return (
             <div>
                 <h1>{standoff ? 'Эта борьба окончилась ничьей!' : `Победили ${win}`}</h1>
                 <hr />
-                <button>Главное меню</button>
-                <button>Переиграть</button>
+                <button
+                    onClick={() => {
+                        gotoMainScreen();
+                    }}>
+                    Главное меню
+                </button>
+                &nbsp;|&nbsp;
+                <button
+                    onClick={() => {
+                        replay();
+                    }}>
+                    Переиграть
+                </button>
             </div>
         );
     }
