@@ -3,6 +3,8 @@ import Field from './components/Field';
 import Entry from './components/Entry';
 import Final from './components/Final';
 
+import { checkWin, checkStandOff, takeCellNeighborhood, takeEmptyCells } from './gameLogics';
+
 class App extends Component {
     state = {
         dimension: 3,
@@ -46,42 +48,15 @@ class App extends Component {
     isGameContinue = (y, x) => {
         const { field, winLength, round } = this.state;
         const sign = !!(round % 2) ? 'x' : 'o';
-        const reg = new RegExp(`${sign},${sign}(,${sign}){${winLength - 2},}`);
 
-        const rays = {
-            horizontal: [],
-            diagonal1: [],
-            diagonal2: [],
-            vertical: []
-        };
+        const rays = takeCellNeighborhood(field, winLength, y, x);
 
-        field.forEach((row, keyY) => {
-            row.forEach((cell, keyX) => {
-                if (Math.abs(keyX - x) < winLength) {
-                    if (keyY === y) rays.horizontal.push(cell);
-                    if (keyX - x === keyY - y) rays.diagonal1.push(cell);
-                    if (keyX - x === y - keyY) rays.diagonal2.push(cell);
-                }
-                if (Math.abs(keyY - y) < winLength) {
-                    if (keyX === x) rays.vertical.push(cell);
-                }
-            });
-        });
-
-        if (
-            rays.horizontal.join().search(reg) !== -1 ||
-            rays.vertical.join().search(reg) !== -1 ||
-            rays.diagonal1.join().search(reg) !== -1 ||
-            rays.diagonal2.join().search(reg) !== -1
-        ) {
+        if (checkWin(rays, sign, winLength)) {
             this.setState({
                 gameOver: true,
                 win: sign
             });
-        } else if (
-            // todo check standoff
-            false
-        ) {
+        } else if (checkStandOff(field)) {
             this.setState({
                 gameOver: true,
                 standoff: true
