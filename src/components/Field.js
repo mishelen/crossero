@@ -6,7 +6,7 @@ const Field = ({ field, drawSign }) => {
     const renderRow = (row, keyY) =>
         row.map((cell, keyX) => <Cell key={keyX} cell={cell} keyY={keyY} keyX={keyX} drawSign={drawSign} />);
 
-    return field.map((row, keyY) => <div key={keyY}>{renderRow(row, keyY)}</div>);
+    return <div className="field">{field.map((row, keyY) => <div key={keyY}>{renderRow(row, keyY)}</div>)}</div>;
 };
 
 Field.propTypes = {

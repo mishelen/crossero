@@ -13,7 +13,7 @@ class Final extends PureComponent {
         const { standoff, win, gotoMainScreen, replay } = this.props;
 
         return (
-            <div>
+            <div className="final">
                 <h1>{standoff ? 'Эта борьба окончилась ничьей!' : `Победили ${win}`}</h1>
                 <hr />
                 <button

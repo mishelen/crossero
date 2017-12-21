@@ -16,15 +16,7 @@ class Cell extends PureComponent {
         const sign = cell === 'x' ? <Cross /> : cell === 'o' ? <Zero /> : '';
 
         return (
-            <div
-                style={{
-                    display: 'inline-block',
-                    verticalAlign: 'top',
-                    width: 45,
-                    height: 45,
-                    border: '1px solid black'
-                }}
-                {...(!cell ? { onClick: drawSign(keyY, keyX) } : {})}>
+            <div className="field__cell" {...(!cell ? { onClick: drawSign(keyY, keyX) } : {})}>
                 {sign}
             </div>
         );
