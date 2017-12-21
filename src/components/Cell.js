@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Zero from './zero';
+import Cross from './cross';
 
 class Cell extends PureComponent {
     static propTypes = {
@@ -11,6 +13,7 @@ class Cell extends PureComponent {
 
     render() {
         const { cell, drawSign, keyX, keyY } = this.props;
+        const sign = cell === 'x' ? <Cross /> : cell === 'o' ? <Zero /> : '';
 
         return (
             <div
@@ -22,7 +25,7 @@ class Cell extends PureComponent {
                     border: '1px solid black'
                 }}
                 {...(!cell ? { onClick: drawSign(keyY, keyX) } : {})}>
-                {cell}
+                {sign}
             </div>
         );
     }
