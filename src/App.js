@@ -8,7 +8,10 @@ class App extends Component {
         winLength: 3,
         field: [],
         round: 0,
-        gameStarted: false
+        gameStarted: false,
+        gameOver: false,
+        win: null,
+        standoff: false
     };
 
     initializeField = settings => {
@@ -35,6 +38,28 @@ class App extends Component {
         this.initializeField(data);
     };
 
+    isGameContinue = () => {
+        const { /* field, winLength,*/ round } = this.state;
+        const sign = !!(round % 2) ? 'x' : '0';
+        if (
+            // todo check win
+            false
+        ) {
+            this.setState({
+                gameOver: true,
+                win: sign
+            });
+        } else if (
+            // todo check standoff
+            false
+        ) {
+            this.setState({
+                gameOver: true,
+                standoff: true
+            });
+        }
+    };
+
     drawSign = (Y, X) => () => {
         this.setState(prevState => {
             const { field, round } = prevState;
@@ -45,7 +70,7 @@ class App extends Component {
                 ),
                 round: round + 1
             };
-        });
+        }, this.isGameContinue);
     };
 
     render() {
