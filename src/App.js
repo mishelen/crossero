@@ -3,7 +3,7 @@ import Field from './components/Field';
 import Entry from './components/Entry';
 import Final from './components/Final';
 
-import { checkWin, checkStandOff, takeCellNeighborhood, takeEmptyCells } from './gameLogics';
+import { checkWin, checkStandOff, takeCellNeighborhood } from './gameLogics';
 
 class App extends Component {
     state = {

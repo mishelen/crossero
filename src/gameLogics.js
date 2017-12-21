@@ -47,9 +47,9 @@ export function checkWin(rays, sign, winLength) {
     return false;
 }
 
-export function checkStandOff(matrix) {
-    const cells = takeEmptyCells(matrix);
+export function checkStandOff(/*matrix*/) {
     // todo checking
+    //const cells = takeEmptyCells(matrix);
     //for (let i = 0; i <= cells.length; ++i) {
     //    const rays = takeCellNeighborhood(cells[i]);
     //}
