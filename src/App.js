@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Field from './components/Field';
 import Entry from './components/Entry';
+import Final from './components/Final';
 
 class App extends Component {
     state = {
@@ -8,7 +9,7 @@ class App extends Component {
         winLength: 3,
         field: [],
         round: 0,
-        gameStarted: false,
+        mainScreen: true,
         gameOver: false,
         win: null,
         standoff: false
@@ -29,13 +30,17 @@ class App extends Component {
                 };
             },
             () => {
-                this.setState({ gameStarted: true });
+                this.setState({ mainScreen: false, gameOver: false, round: 0 });
             }
         );
     };
 
     startGame = data => {
         this.initializeField(data);
+    };
+
+    goToMainScreen = () => {
+        this.setState({ mainScreen: true, gameOver: false });
     };
 
     isGameContinue = (y, x) => {
@@ -101,10 +106,22 @@ class App extends Component {
     };
 
     render() {
-        const { field, gameStarted } = this.state;
-        const { drawSign, startGame } = this;
+        const { field, mainScreen, gameOver, standoff, win, winLength, dimension, round } = this.state;
+        const { drawSign, startGame, goToMainScreen } = this;
 
-        return <div>{gameStarted ? <Field field={field} drawSign={drawSign} /> : <Entry startGame={startGame} />}</div>;
+        return (
+            <div className="container">
+                {!gameOver ? (
+                    mainScreen ? (
+                        <Entry startGame={startGame} winLength={winLength} dimension={dimension} />
+                    ) : (
+                        <Field field={field} drawSign={drawSign} goToMainScreen={goToMainScreen} round={round} />
+                    )
+                ) : (
+                    <Final standoff={standoff} win={win} gotoMainScreen={goToMainScreen} replay={startGame} />
+                )}
+            </div>
+        );
     }
 }
 
