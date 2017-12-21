@@ -9,7 +9,7 @@ body,
 body {
     margin: 0;
     padding: 0;
-    background: url('/noisy-texture-100x100-o5-d10-c-f7f4f5-t1.png') repeat;
+    background: url('./images/noisy-texture-100x100-o5-d10-c-f7f4f5-t1.png') repeat;
 }
 
 body,
