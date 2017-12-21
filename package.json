@@ -19,7 +19,7 @@
     "*.js": ["eslint --fix", "git add"],
     "*.json": ["prettier --write", "git add"],
     "{.prettier,.eslintrc}": ["prettier --write", "git add"],
-    "*.scss": ["prettier --write", "git add"],
+    "*.css": ["prettier --write", "git add"],
     "*.md": ["prettier --write", "git add"]
   },
   "devDependencies": {

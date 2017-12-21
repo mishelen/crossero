@@ -17,9 +17,9 @@
             }
         },
         {
-            "files": "*.scss",
+            "files": "*.css",
             "options": {
-                "parser": "scss",
+                "parser": "css",
                 "singleQuote": true,
                 "tabWidth": 4
             }

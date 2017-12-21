@@ -1,5 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|DroidSans:100,300,400|Roboto:400,700');
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/noisy-texture-100x100-o5-d10-c-f7f4f5-t1.png') repeat;
+}
+
+body,
+input,
+textarea,
+select,
+button {
+    color: #4d4a48;
+    font-family: Montserrat, sans-serif;
+}
+
+input,
+textarea,
+select,
+button {
+    cursor: pointer;
+}
+
+hr {
+    border: 0 dotted rgb(209, 203, 166);
+    border-top-width: 2px;
 }
