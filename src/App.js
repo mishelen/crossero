@@ -38,12 +38,36 @@ class App extends Component {
         this.initializeField(data);
     };
 
-    isGameContinue = () => {
-        const { /* field, winLength,*/ round } = this.state;
-        const sign = !!(round % 2) ? 'x' : '0';
+    isGameContinue = (y, x) => {
+        const { field, winLength, round } = this.state;
+        const sign = !!(round % 2) ? 'x' : 'o';
+        const reg = new RegExp(`${sign},${sign}(,${sign}){${winLength - 2},}`);
+
+        const rays = {
+            horizontal: [],
+            diagonal1: [],
+            diagonal2: [],
+            vertical: []
+        };
+
+        field.forEach((row, keyY) => {
+            row.forEach((cell, keyX) => {
+                if (Math.abs(keyX - x) < winLength) {
+                    if (keyY === y) rays.horizontal.push(cell);
+                    if (keyX - x === keyY - y) rays.diagonal1.push(cell);
+                    if (keyX - x === y - keyY) rays.diagonal2.push(cell);
+                }
+                if (Math.abs(keyY - y) < winLength) {
+                    if (keyX === x) rays.vertical.push(cell);
+                }
+            });
+        });
+
         if (
-            // todo check win
-            false
+            rays.horizontal.join().search(reg) !== -1 ||
+            rays.vertical.join().search(reg) !== -1 ||
+            rays.diagonal1.join().search(reg) !== -1 ||
+            rays.diagonal2.join().search(reg) !== -1
         ) {
             this.setState({
                 gameOver: true,
@@ -61,16 +85,19 @@ class App extends Component {
     };
 
     drawSign = (Y, X) => () => {
-        this.setState(prevState => {
-            const { field, round } = prevState;
-            const sign = !(round % 2) ? 'x' : 'o';
-            return {
-                field: field.map(
-                    (row, keyY) => (keyY !== Y ? row : row.map((cell, keyX) => (keyX !== X ? cell : sign)))
-                ),
-                round: round + 1
-            };
-        }, this.isGameContinue);
+        this.setState(
+            prevState => {
+                const { field, round } = prevState;
+                const sign = !(round % 2) ? 'x' : 'o';
+                return {
+                    field: field.map(
+                        (row, keyY) => (keyY !== Y ? row : row.map((cell, keyX) => (keyX !== X ? cell : sign)))
+                    ),
+                    round: round + 1
+                };
+            },
+            () => this.isGameContinue(Y, X)
+        );
     };
 
     render() {
